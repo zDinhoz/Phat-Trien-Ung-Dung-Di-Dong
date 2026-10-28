@@ -26,8 +26,6 @@ The laptop then overlays the returned pose landmarks onto the live camera feed.
 ## System Architecture
 
 ```text
-<div align="center">
-<pre>
             Laptop Camera
                   │
                   ▼
@@ -60,8 +58,6 @@ The laptop then overlays the returned pose landmarks onto the live camera feed.
                   │
                   ▼
      Real-time Pose Visualization
-</pre>
-</div>
 ```
 
 ---
