@@ -360,35 +360,30 @@ The repository also includes a `systemd` service configuration that can be used 
 
 ## Network Configuration
 
-The included Ethernet configuration demonstrates a static IPv4 setup for direct laptop-to-BeagleBone Black communication.
+The laptop client and BeagleBone Black communicate over a TCP/IP connection.
 
-Example configuration:
+The network address is configurable depending on the deployment environment. The laptop client should be configured to connect to the IP address assigned to the BeagleBone Black.
 
-```text
-BBB:     192.168.137.2/24
-Gateway: 192.168.137.1
-TCP Port: 5000
+Example:
+
+```bash
+python laptop_stream_client.py --host <BBB_IP_ADDRESS> --port 5000
 ```
 
-The actual IP address should be adjusted according to the network configuration being used.
-
----
-
-## Runtime Assets
-
-Some runtime assets are generated or obtained separately and are therefore not included in the source folders.
-
-Depending on the configuration, the system may require:
+The server listens for incoming client connections on the configured TCP port.
 
 ```text
-handpose_accuracy_epoch84_opset11.onnx
-hand_landmarker.task
+Laptop Client
+      |
+      | TCP/IP
+      v
+BeagleBone Black
+      |
+      v
+AI Inference Server
 ```
 
-- The ONNX model is generated from the trained PyTorch checkpoint.
-- `hand_landmarker.task` is used by MediaPipe on the laptop for automatic hand detection.
-
----
+Network parameters may be adjusted according to the Ethernet or local network configuration used during deployment.
 
 ## Key Engineering Features
 
