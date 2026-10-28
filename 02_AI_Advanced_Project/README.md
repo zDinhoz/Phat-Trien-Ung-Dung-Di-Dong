@@ -26,35 +26,42 @@ The laptop then overlays the returned pose landmarks onto the live camera feed.
 ## System Architecture
 
 ```text
-Laptop Camera
-     |
-     v
-Hand Detection / ROI Extraction
-(MediaPipe)
-     |
-     v
-JPEG Hand Crop
-     |
-     | TCP/IP
-     v
-+-----------------------------+
-|     BeagleBone Black        |
-|                             |
-|  OpenCV DNN                 |
-|       |                     |
-|       v                     |
-|  ONNX Hand Pose Model       |
-|       |                     |
-|       v                     |
-|  21 Hand Keypoints          |
-+-----------------------------+
-     |
-     | JSON + Annotated JPEG
-     v
-Laptop Client
-     |
-     v
-Real-time Pose Visualization
+<div align="center">
+<pre>
+            Laptop Camera
+                  │
+                  ▼
+     Hand Detection / ROI Extraction
+              (MediaPipe)
+                  │
+                  ▼
+           JPEG Hand Crop
+                  │
+               TCP/IP
+                  │
+                  ▼
+      ┌─────────────────────────┐
+      │    BeagleBone Black     │
+      │                         │
+      │       OpenCV DNN        │
+      │            │            │
+      │            ▼            │
+      │   ONNX Hand Pose Model  │
+      │            │            │
+      │            ▼            │
+      │     21 Hand Keypoints   │
+      └─────────────────────────┘
+                  │
+                  │
+       JSON + Annotated JPEG
+                  │
+                  ▼
+            Laptop Client
+                  │
+                  ▼
+     Real-time Pose Visualization
+</pre>
+</div>
 ```
 
 ---
